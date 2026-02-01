@@ -1,7 +1,6 @@
-
 /* ======================
-   Header
-   ====================== */
+    Header
+    ====================== */
 
 .site-header {
     background: #f8f9fa;
@@ -12,17 +11,19 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem 0; 
+    padding: 1rem 0;
 }
 
 /* Brand */
 .brand {
-    font-size: 3rem;
-    font-weight: 800;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin: 0;
+
+    font-size: 3rem;
+    font-weight: 800;
+    text-decoration: none;
+    color: inherit;
 }
 
 .logo-img {
@@ -40,7 +41,7 @@
     display: flex;
     gap: 1.5rem;
     padding: 0;
-    margin: 1rem 0 0;   /* top spacing, left aligned */
+    margin: 1rem 0 0;
 }
 
 .nav-links a {
@@ -49,22 +50,22 @@
     font-weight: 600;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a:focus-visible {
     text-decoration: underline;
 }
 
 /* ======================
-   main
-   ====================== */
+    Main
+    ====================== */
 
 main.container {
-    margin-top: 1.5rem;     
-    margin-bottom: 2rem;
+    margin: 1.5rem auto 2rem;
 }
 
-/* Page intro (title + subtitle) */
+/* Page intro */
 .page-intro {
-    margin-bottom: 1.5rem;  
+    margin-bottom: 1.5rem;
 }
 
 .page-title {
@@ -85,10 +86,21 @@ main.container {
     margin: 0 0 1rem;
 }
 
-
 /* ======================
-   Gallery Cards
-   ====================== */
+    Gallery Cards
+    ====================== */
+
+/* Fade-up entrance animation */
+@keyframes fadeUp {
+    from {
+    opacity: 0;
+    transform: translateY(10px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+}
 
 .book-card {
     height: 100%;
@@ -97,55 +109,85 @@ main.container {
     overflow: hidden;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    animation: fadeUp 420ms ease-out both;
 }
 
+.book-figure {
+    margin: 0;
+}
+
+/* Clickable thumbnail */
 .book-thumb {
     position: relative;
+    display: block;
     background: #f6f6f6;
+    overflow: hidden;
+    text-decoration: none;
 }
 
+/* Image */
+.book-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
 
-.see-more{
-    background: #4da3ff;          /* blue background */
-    color: #ffffff;               /* white text */
+/* Overlay background */
+.book-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    transition: opacity 320ms ease;
+    pointer-events: none;
+}
 
-    padding: 0.8rem 1.4rem;       /* bigger pill */
+/* Overlay button */
+.book-thumb::after {
+    content: "See more →";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+
+    background: #4da3ff;
+    color: #fff;
+    padding: 0.8rem 1.4rem;
     border-radius: 999px;
 
     font-size: 1rem;
     font-weight: 700;
+    white-space: nowrap;
 
     box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-}
-
-/* Overlay */
-.book-overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.45);
-    color: #fff;
-    font-weight: 700;
-    text-decoration: none;
     opacity: 0;
-    transition: opacity 160ms ease;
+
+    transition: opacity 320ms ease, transform 320ms ease;
+    pointer-events: none;
 }
 
-.book-thumb:hover .book-overlay,
-.book-overlay:focus {
+/* Hover (mouse) */
+.book-thumb:hover::before,
+.book-thumb:hover::after {
     opacity: 1;
 }
 
 
-.book-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+/* Focus (keyboard) */
+.book-thumb:focus-visible::before,
+.book-thumb:focus-visible::after {
+    opacity: 1;
 }
 
+/* Focus outline */
+.book-thumb:focus-visible {
+    outline: 3px solid rgba(77,163,255,0.6);
+    outline-offset: 4px;
+}
+
+/* Caption */
 .book-info {
     padding: 14px 14px 16px;
 }
@@ -162,59 +204,72 @@ main.container {
     font-size: 0.95rem;
 }
 
-
-
 /* ======================
-   About this site
-   ====================== */
-.about { 
+    About section
+    ====================== */
+
+.about {
     margin-top: 2.25rem;
 }
 
 .info-box {
-  border: 1px solid #d9dde3;
-  background: #f3f5f7;
-  border-radius: 14px;
-  padding: 1.25rem 1.25rem 1rem;
+    border: 1px solid #d9dde3;
+    background: #f3f5f7;
+    border-radius: 14px;
+    padding: 1.25rem;
 }
 
 .info-lead {
-  margin: 0 0 0.75rem;
-  color: #333;
-  font-weight: 600;
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+    color: #333;
 }
 
 .info-list {
-  margin: 0 0 1rem 1.25rem;
-  color: #333;
+    margin: 0 0 1rem 1.25rem;
+    color: #333;
 }
 
 .info-list li {
-  margin: 0.25rem 0;
+    margin: 0.25rem 0;
 }
 
 .info-note {
-  margin: 0.5rem 0 0;
-  color: #444;
-  line-height: 1.45;
+    margin: 0.5rem 0 0;
+    color: #444;
+    line-height: 1.45;
 }
 
 /* ======================
-   Footer
-   ====================== */
+    Footer
+    ====================== */
+
 .site-footer {
-  margin-top: 3rem;
-  padding: 1.25rem 0;
-  background: #f8f9fa;
-  border-top: 1px solid #e0e0e0;
+    margin-top: 3rem;
+    padding: 1.25rem 0;
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
 }
 
 .footer-text {
-  margin: 0;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #666;
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: #666;
 }
+
+/* ======================
+    Reduced Motion
+    ====================== */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+    }
+}
+
+
 
 
 /* ======================
