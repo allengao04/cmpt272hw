@@ -1,0 +1,145 @@
+/* ======================
+    Header
+    ====================== */
+
+.site-header {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Brand */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo-img {
+    width: 80px;
+    border-radius: 50%;
+    height: auto;
+    display: block;
+}
+
+
+.logo-blue { 
+    color: #4da3ff; 
+    font-size: 2rem;
+    font-weight: 700;
+}
+.logo-dark { 
+    color: #222; 
+    font-size: 2rem;
+    font-weight: 700;
+}
+    
+.iconTitle p{
+    color: rgb(130, 132, 135);
+}  
+
+.tool{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;    
+}
+  
+@media (min-width: 768px) {      /* md breakpoint */
+    .tool{
+      justify-content: flex-end;   /* md+ = right */
+    }
+}
+
+.tool p{
+    padding: 4px 12px;   /* smaller */
+    font-weight: 800;
+    background-color: grey;
+    border-radius: 999px;
+    color: white;
+}
+
+/* ======================
+main 
+====================== */
+
+.main_content{
+    margin-top: 50px;
+}
+
+
+.toolbar_box{
+    margin-top: 30px;
+    margin-bottom: 60px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;   
+    border-radius: 8px;         
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); 
+    padding: 30px 20px 30px 20px;
+
+}
+
+.toolbar_box p{
+    font-weight: 800;
+}
+
+
+.toolbar_box #result{
+    font-weight: 500;
+    margin-top: 10px;
+    text-align: right;
+    color: rgb(130, 132, 135);
+}
+
+/* .display{
+
+} */
+
+.Display_Title{
+    display: flex;
+    justify-content: space-between;
+}
+
+    
+/* ======================
+Footer
+====================== */
+
+.site-footer {
+    margin-top: 3rem;
+    padding: 1.25rem 0;
+    background: #f8f9fa;
+    border-top: 1px solid #e0e0e0;
+}
+
+.footer-text {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+    
+/* ======================
+Display card 
+====================== */
+
+.card-body p{
+    color: rgb(130, 132, 135);
+    margin-top: 10px;
+}
+
+.custom-card {
+    min-height: 250px; 
+}
+
+.modal-meta p {
+    margin-bottom: 0.25rem; 
+    color: rgb(130, 132, 135);
+}
