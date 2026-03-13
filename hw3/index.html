@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Builder</title>
+
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-light">
+  <main class="container py-4">
+    <h1 class="fw-bold mb-4">Recipe Builder</h1>
+    <section class="row g-4">
+      <div class="col-12 col-lg-7">
+        <div class="card shadow-sm">
+          <div class="card-header bg-white">
+            <h2 class="h4 mb-1 fw-bold">Pantry</h2>
+            <p class="text-muted mb-0">Nutrition per 100g</p>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Cal</th>
+                  <th scope="col">P</th>
+                  <th scope="col">C</th>
+                  <th scope="col">F</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody id="pantryBody">
+                <!-- rendered by TypeScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-5">
+        <div class="d-flex flex-column gap-4">
+
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <h2 id="currentRecipeTitle" class="h4 mb-0 fw-bold">Current Recipe</h2>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table mb-0 align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">Ingredient</th>
+                    <th scope="col">Grams</th>
+                    <th scope="col">Cal</th>
+                    <th scope="col">P</th>
+                    <th scope="col">C</th>
+                    <th scope="col">F</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody id="recipeBody">
+                  <tr>
+                    <td colspan="7" class="text-center text-muted py-5">
+                      No ingredients yet. Add items from the pantry.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card shadow-sm">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+              <h2 class="h4 mb-0 fw-bold">Totals</h2>
+              <span class="text-muted">Live Nutrition</span>
+            </div>
+
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-12 col-sm-6">
+                  <div class="border rounded p-3 h-100">
+                    <p class="text-muted mb-2">Calories</p>
+                    <p id="totalCalories" class="fs-1 fw-bold mb-0">0</p>
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <div class="border rounded p-3 h-100">
+                    <p class="text-muted mb-2">Protein (g)</p>
+                    <p id="totalProtein" class="fs-1 fw-bold mb-0">0</p>
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <div class="border rounded p-3 h-100">
+                    <p class="text-muted mb-2">Carbs (g)</p>
+                    <p id="totalCarbs" class="fs-1 fw-bold mb-0">0</p>
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <div class="border rounded p-3 h-100">
+                    <p class="text-muted mb-2">Fat (g)</p>
+                    <p id="totalFat" class="fs-1 fw-bold mb-0">0</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card shadow-sm mt-4">
+      <div class="card-body">
+        <div class="row g-3 align-items-end">
+
+          <div class="col-12 col-lg-4">
+            <label for="recipeName" class="form-label fw-semibold">Recipe Name</label>
+            <input
+              type="text"
+              id="recipeName"
+              class="form-control form-control-lg"
+              placeholder="e.g., Lunch Bowl"
+            />
+          </div>
+
+          <div class="col-12 col-lg-8">
+            <div class="row g-3 align-items-end">
+
+              <div class="col-md-5">
+                <label for="recipeType" class="form-label fw-semibold">Recipe Type</label>
+                <select id="recipeType" class="form-select form-select-lg">
+                  <option value="regular" selected>Regular Recipe</option>
+                  <option value="highProtein">High Protein</option>
+                  <option value="lowCarb">Low Carb</option>
+                  <option value="vegetarian">Vegetarian</option>
+                </select>
+              </div>
+
+              <div class="col-md-7">
+                <div class="d-flex gap-3 flex-wrap justify-content-md-end">
+                  <button id="clearFormBtn" type="button" class="btn btn-outline-secondary px-4">
+                    Clear Form
+                  </button>
+                  <button id="saveRecipeBtn" type="button" class="btn btn-success px-5">
+                    Save
+                  </button>
+                  <button id="loadRecipeBtn" type="button" class="btn btn-warning px-5">
+                    Load
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Saved Recipes Modal -->
+          <div class="modal fade" id="savedRecipesModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fw-bold">Saved Recipes</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div id="savedRecipesList">
+                    <p class="text-muted mb-0">No saved recipes yet.</p>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recipe Detail Modal -->
+          <div class="modal fade" id="recipeDetailModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fw-bold">Recipe Details</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="d-flex align-items-center gap-3 mb-3">
+                    <button id="backToSavedRecipesBtn" type="button" class="btn btn-outline-secondary btn-sm">
+                      ← Back
+                    </button>
+                    <h4 id="detailRecipeName" class="mb-0"></h4>
+                    <span id="detailRecipeTypeBadge" class="badge"></span>
+                  </div>
+
+                  <div class="table-responsive">
+                    <table class="table align-middle">
+                      <thead>
+                        <tr>
+                          <th>Ingredient</th>
+                          <th>Grams</th>
+                          <th>Calories</th>
+                        </tr>
+                      </thead>
+                      <tbody id="detailRecipeBody"></tbody>
+                    </table>
+                  </div>
+
+                  <div class="border-top pt-3">
+                    <div class="d-flex justify-content-between fw-bold mb-2">
+                      <span>Total</span>
+                      <span id="detailTotalCalories"></span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <span class="fw-semibold">Protein / Carbs / Fat</span>
+                      <span id="detailMacros"></span>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button id="loadSelectedRecipeBtn" type="button" class="btn btn-primary">
+                    Load This Recipe
+                  </button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;"></div>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
